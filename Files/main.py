@@ -63,6 +63,10 @@ class GraphingCalculator:
             # Create a namespace for the math functions
             namespace = {'x': x_vals}
             namespace.update(math.__dict__)
+            namespace.update({'exp': np.exp, 'sin': np.sin, 
+                              'cos': np.cos, 'tan': np.tan,
+                              'log': np.log10, 'ln': np.log, 
+                              'sqrt': np.sqrt}) # type: ignore
 
             # Evaluate the function for each x value
             try:
