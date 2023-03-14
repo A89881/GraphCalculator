@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math
 import tkinter as tk
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.figure import Figure
 
 class GraphingCalculator:
     def __init__(self, master):
@@ -39,7 +41,7 @@ class GraphingCalculator:
         # Create plot button
         self.plot_button = tk.Button(master, text="plot", command=self.plot_function)
         self.plot_button.pack()
-
+        
     def plot_function(self):
         # Get function string and x range from entry boxes
         function_str = self.function_entry.get()
