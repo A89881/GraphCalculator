@@ -26,7 +26,7 @@ class GraphingCalculator:
         self.x_max_entry.pack()
 
         # Create color input label and entry box
-        self.color_label = tk.Label(master, text="Enter Color for Function")
+        self.color_label = tk.Label(master, text="Color: ")
         self.color_label.pack()
         self.color_entry = tk.Entry(master)
         self.color_entry.pack()
@@ -44,7 +44,8 @@ class GraphingCalculator:
         clr = str(self.color_entry.get())
 
         # Define the x values to plot
-        num_points = 1000
+        num_points = abs(int(x_range[0])) + abs(int(x_range[1]))
+        print(num_points)
         x_vals = np.linspace(x_range[0], x_range[1], num_points)
 
         # Create a namespace for the math functions
@@ -64,7 +65,6 @@ class GraphingCalculator:
         # Add labels and title
         plt.xlabel("X-Axis")
         plt.ylabel("Y-Axis")
-        plt.title(function_str)
         plt.legend()
 
         # Show the plot
