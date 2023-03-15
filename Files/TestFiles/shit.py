@@ -76,3 +76,75 @@ This can write show the coordinate of one function at least
 
 # # Create a plot tracker object
 # tracker = PlotTracker(x, y)
+
+"""
+Failed annote function
+"""
+
+#  handle, = plt.plot(self.x_vals, self.y_vals, label=function_str, color=clr)
+#         # Add the hover functionality
+#         def on_hover(event):
+#             if event.inaxes is not None and event.inaxes.get_lines():
+#                 line = event.inaxes.get_lines()[0]
+#                 xdata = line.get_xdata()
+#                 ydata = line.get_ydata()
+#                 x, y = event.xdata, event.ydata
+#                 index = find_nearest_index(xdata, x)
+#                 x_val, y_val = xdata[index], ydata[index]
+#                 plt.title(f"({x_val:.2f}, {y_val:.2f})")
+#                 plt.draw()
+
+#         def on_press(event):
+#             if event.inaxes is not None and event.inaxes.get_lines():
+#                 line = event.inaxes.get_lines()[0]
+#                 xdata = line.get_xdata()
+#                 ydata = line.get_ydata()
+#                 x, y = event.xdata, event.ydata
+#                 index = find_nearest_index(xdata, x)
+#                 x_val, y_val = xdata[index], ydata[index]
+#                 plt.title(f"({x_val:.2f}, {y_val:.2f})")
+#                 plt.draw()
+#                 fig.canvas.mpl_disconnect(hover_cid)
+#                 fig.canvas.mpl_connect('motion_notify_event', on_move)
+
+#         def on_move(event):
+#             if event.inaxes is not None and event.inaxes.get_lines():
+#                 line = event.inaxes.get_lines()[0]
+#                 xdata = line.get_xdata()
+#                 ydata = line.get_ydata()
+#                 x, y = event.xdata, event.ydata
+#                 index = find_nearest_index(xdata, x)
+#                 x_val, y_val = xdata[index], ydata[index]
+#                 plt.title(f"({x_val:.2f}, {y_val:.2f})")
+#                 plt.draw()
+
+#         fig = plt.gcf()
+#         hover_cid = fig.canvas.mpl_connect('motion_notify_event', on_hover)
+#         press_cid = fig.canvas.mpl_connect('button_press_event', on_press)
+
+#         self.plot_handles[function_str] = handle
+
+        
+
+#         def find_nearest_index(array, value):
+#             return np.abs(array - value).argmin()
+    
+#     # Add labels and title
+#         plt.xlabel("X-Axis")
+#         plt.ylabel("Y-Axis")
+#         plt.legend()
+
+
+"""
+Failed attempt 
+"""
+#  def annote_plot(self):
+#         fig, ax = plt.subplots()
+#         ax.set_title("click on plot to annote")
+
+#         def on_click(event):
+#             if event.inaxes is not None:
+#                 x, y = event.xdata, event.ydata
+#                 ax.set_title(f"clicked at ({x:.2f}, {y:.2f}) ")
+#         fig.canvas.mpl_connect('button_press_event', on_click)
+#         plt.show()

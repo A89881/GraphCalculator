@@ -11,7 +11,7 @@ class GraphingCalculator:
         self.plot_handles = {}  # keep track of plotted functions and their colors
 
         master.resizable(True, True)
-        master.minsize(500, 500)
+        master.minsize(300, 300)
 
         # Create function input label and entry box
         self.function_label = tk.Label(master, text="function")
@@ -87,62 +87,83 @@ class GraphingCalculator:
         plt.xlabel("X-Axis")
         plt.ylabel("Y-Axis")
         plt.legend()
+        plt.show()
+ 
 
+#     def find_nearest_index(array, value):
+#         return np.abs(array - value).argmin()
 
-        handle, = plt.plot(self.x_vals, self.y_vals, label=function_str, color=clr)
-        # Add the hover functionality
-        def on_hover(event):
-            if event.inaxes is not None and event.inaxes.get_lines():
-                line = event.inaxes.get_lines()[0]
-                xdata = line.get_xdata()
-                ydata = line.get_ydata()
-                x, y = event.xdata, event.ydata
-                index = find_nearest_index(xdata, x)
-                x_val, y_val = xdata[index], ydata[index]
-                plt.title(f"({x_val:.2f}, {y_val:.2f})")
-                plt.draw()
+#     def on_hover(event):
+#         if event.inaxes is not None and event.inaxes.get_lines():
+#             line = event.inaxes.get_lines()[0]
+#             xdata = line.get_xdata()
+#             ydata = line.get_ydata()
+#             x, y = event.xdata, event.ydata
+#             index = find_nearest_index(xdata, x)
+#             x_val, y_val = xdata[index], ydata[index]
+#             plt.title(f"({x_val:.2f}, {y_val:.2f})")
+#             plt.draw()
 
-        def on_press(event):
-            if event.inaxes is not None and event.inaxes.get_lines():
-                line = event.inaxes.get_lines()[0]
-                xdata = line.get_xdata()
-                ydata = line.get_ydata()
-                x, y = event.xdata, event.ydata
-                index = find_nearest_index(xdata, x)
-                x_val, y_val = xdata[index], ydata[index]
-                plt.title(f"({x_val:.2f}, {y_val:.2f})")
-                plt.draw()
-                fig.canvas.mpl_disconnect(hover_cid)
-                fig.canvas.mpl_connect('motion_notify_event', on_move)
+#     def on_press(event):
+#         if event.inaxes is not None and event.inaxes.get_lines():
+#             line = event.inaxes.get_lines()[0]
+#             xdata = line.get_xdata()
+#             ydata = line.get_ydata()
+#             x, y = event.xdata, event.ydata
+#             index = find_nearest_index(xdata, x)
+#             x_val, y_val = xdata[index], ydata[index]
+#             plt.title(f"({x_val:.2f}, {y_val:.2f})")
+#             plt.draw()
+#             fig.canvas.mpl_disconnect(hover_cid)
+#             fig.canvas.mpl_connect('motion_notify_event', on_move)
 
-        def on_move(event):
-            if event.inaxes is not None and event.inaxes.get_lines():
-                line = event.inaxes.get_lines()[0]
-                xdata = line.get_xdata()
-                ydata = line.get_ydata()
-                x, y = event.xdata, event.ydata
-                index = find_nearest_index(xdata, x)
-                x_val, y_val = xdata[index], ydata[index]
-                plt.title(f"({x_val:.2f}, {y_val:.2f})")
-                plt.draw()
+#     def on_move(event):
+#         if event.inaxes is not None and event.inaxes.get_lines():
+#             line = event.inaxes.get_lines()[0]
+#             xdata = line.get_xdata()
+#             ydata = line.get_ydata()
+#             x, y = event.xdata, event.ydata
+#             index = find_nearest_index(xdata, x)
+#             x_val, y_val = xdata[index], ydata[index]
+#             plt.title(f"({x_val:.2f}, {y_val:.2f})")
+#             plt.draw()
 
-        fig = plt.gcf()
-        hover_cid = fig.canvas.mpl_connect('motion_notify_event', on_hover)
-        press_cid = fig.canvas.mpl_connect('button_press_event', on_press)
+#     def plot_functions(functions):
+#         fig, ax = plt.subplots()
+#         handle = None
+#         for function_str, color in functions:
+#             x = np.linspace(-5, 5, 1000)
+#             y = eval(function_str)
+#             handle, = ax.plot(x, y, color=color, label=function_str)
+#         ax.legend()
+#         ax.set_xlabel('X')
+#         ax.set_ylabel('Y')
+#         ax.set_title('Hover over plot to see coordinates')
+#         hover_cid = fig.canvas.mpl_connect('motion_notify_event', on_hover)
+#         press_cid = fig.canvas.mpl_connect('button_press_event', on_press)
+#         fig.canvas.mpl_connect('key_press_event', lambda event: toggle_functions(event, ax, functions))
+#         plt.show()
 
-        self.plot_handles[function_str] = handle
+#     def toggle_functions(event, ax, functions):
+#         if event.key == 'escape':
+#             plt.close()
+#         elif event.key.isdigit() and int(event.key) < len(functions):
+#             function_str, color = functions[int(event.key)]
+#             x = np.linspace(-5, 5, 1000)
+#             y = eval(function_str)
+#             handle, = ax.plot(x, y, color=color, label=function_str)
+#             ax.legend()
+#             plt.draw()
 
-        
-
-        def find_nearest_index(array, value):
-            return np.abs(array - value).argmin()
-    
-    # Add labels and title
-        plt.xlabel("X-Axis")
-        plt.ylabel("Y-Axis")
-        plt.legend()
-
-
+# functions = [
+#     ('np.sin(x)', 'blue'),
+#     ('np.cos(x)', 'red'),
+#     ('np.tan(x)', 'green'),
+#     ('np.exp(-x**2)', 'purple')
+# ]
+# plot_functions(functions)
+   
+plt.grid()
 root = tk.Tk()
 graphing_calculator = GraphingCalculator(root)
 root.mainloop()

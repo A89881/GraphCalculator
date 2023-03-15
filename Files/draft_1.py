@@ -11,7 +11,7 @@ class GraphingCalculator:
         self.plot_handles = {}  # keep track of plotted functions and their colors
 
         master.resizable(True, True)
-        master.minsize(500, 500)
+        master.minsize(300, 300)
 
         # Create function input label and entry box
         self.function_label = tk.Label(master, text="function")
@@ -86,11 +86,11 @@ class GraphingCalculator:
         # Add labels and title
         plt.xlabel("X-Axis")
         plt.ylabel("Y-Axis")
-        plt.legend()
-
+        plt.legend()    
         # Show the plot
         plt.show()
 
+plt.grid()
 root = tk.Tk()
 graphing_calculator = GraphingCalculator(root)
 root.mainloop()
