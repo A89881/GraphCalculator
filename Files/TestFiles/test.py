@@ -3,8 +3,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math
 import tkinter as tk
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from matplotlib.figure import Figure
 
 class GraphingCalculator:
     def __init__(self, master):
@@ -41,7 +39,7 @@ class GraphingCalculator:
         # Create plot button
         self.plot_button = tk.Button(master, text="plot", command=self.plot_function)
         self.plot_button.pack()
-        
+
     def plot_function(self):
         # Get function string and x range from entry boxes
         function_str = self.function_entry.get()
@@ -63,10 +61,10 @@ class GraphingCalculator:
                 num_points = 1000
             else:
                 num_points = abs(int(x_range[0])) + abs(int(x_range[1]))
-            x_vals = np.linspace(x_range[0], x_range[1], num_points)
+            self.x_vals = np.linspace(x_range[0], x_range[1], num_points)
 
             # Create a namespace for the math functions
-            namespace = {'x': x_vals}
+            namespace = {'x': self.x_vals}
             namespace.update(math.__dict__)
             namespace.update({'exp': np.exp, 'sin': np.sin, 
                               'cos': np.cos, 'tan': np.tan,
@@ -75,23 +73,75 @@ class GraphingCalculator:
 
             # Evaluate the function for each x value
             try:
-                y_vals = eval(function_str, namespace)
+                self.y_vals = eval(function_str, namespace)
             except:
                 messagebox.showerror(title="Error", message="Invalid function.")
                 print("Invalid function.")
                 return
 
             # Create the plot
-            handle, = plt.plot(x_vals, y_vals, label=function_str, color=clr)
+            handle, = plt.plot(self.x_vals, self.y_vals, label=function_str, color=clr)
             self.plot_handles[function_str] = handle
-
+        
         # Add labels and title
         plt.xlabel("X-Axis")
         plt.ylabel("Y-Axis")
         plt.legend()
 
-        # Show the plot
-        plt.show()
+
+        handle, = plt.plot(self.x_vals, self.y_vals, label=function_str, color=clr)
+        # Add the hover functionality
+        def on_hover(event):
+            if event.inaxes is not None and event.inaxes.get_lines():
+                line = event.inaxes.get_lines()[0]
+                xdata = line.get_xdata()
+                ydata = line.get_ydata()
+                x, y = event.xdata, event.ydata
+                index = find_nearest_index(xdata, x)
+                x_val, y_val = xdata[index], ydata[index]
+                plt.title(f"({x_val:.2f}, {y_val:.2f})")
+                plt.draw()
+
+        def on_press(event):
+            if event.inaxes is not None and event.inaxes.get_lines():
+                line = event.inaxes.get_lines()[0]
+                xdata = line.get_xdata()
+                ydata = line.get_ydata()
+                x, y = event.xdata, event.ydata
+                index = find_nearest_index(xdata, x)
+                x_val, y_val = xdata[index], ydata[index]
+                plt.title(f"({x_val:.2f}, {y_val:.2f})")
+                plt.draw()
+                fig.canvas.mpl_disconnect(hover_cid)
+                fig.canvas.mpl_connect('motion_notify_event', on_move)
+
+        def on_move(event):
+            if event.inaxes is not None and event.inaxes.get_lines():
+                line = event.inaxes.get_lines()[0]
+                xdata = line.get_xdata()
+                ydata = line.get_ydata()
+                x, y = event.xdata, event.ydata
+                index = find_nearest_index(xdata, x)
+                x_val, y_val = xdata[index], ydata[index]
+                plt.title(f"({x_val:.2f}, {y_val:.2f})")
+                plt.draw()
+
+        fig = plt.gcf()
+        hover_cid = fig.canvas.mpl_connect('motion_notify_event', on_hover)
+        press_cid = fig.canvas.mpl_connect('button_press_event', on_press)
+
+        self.plot_handles[function_str] = handle
+
+        
+
+        def find_nearest_index(array, value):
+            return np.abs(array - value).argmin()
+    
+    # Add labels and title
+        plt.xlabel("X-Axis")
+        plt.ylabel("Y-Axis")
+        plt.legend()
+
 
 root = tk.Tk()
 graphing_calculator = GraphingCalculator(root)
