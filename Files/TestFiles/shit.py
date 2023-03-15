@@ -136,15 +136,48 @@ Failed annote function
 
 
 """
-Failed attempt 
+Toggles between different graphs with different plots
 """
-#  def annote_plot(self):
-#         fig, ax = plt.subplots()
-#         ax.set_title("click on plot to annote")
+# import numpy as np
+# import matplotlib.pyplot as plt
 
-#         def on_click(event):
-#             if event.inaxes is not None:
-#                 x, y = event.xdata, event.ydata
-#                 ax.set_title(f"clicked at ({x:.2f}, {y:.2f}) ")
-#         fig.canvas.mpl_connect('button_press_event', on_click)
-#         plt.show()
+# # Define the functions to plot
+# x = np.linspace(-10, 10, 1000)
+# y1 = np.sin(x)
+# y2 = np.cos(x)
+# y3 = np.tan(x)
+
+# # Create the initial plot of the first function
+# fig, ax = plt.subplots()
+# line, = ax.plot(x, y1)
+
+# # Define a list of the functions to toggle between
+# functions = [y1, y2, y3]
+# function_names = ['y=sin(x)', 'y=cos(x)', 'y=tan(x)']
+# current_function = 0
+
+# # Define a function to toggle between the different functions
+# def toggle_function(event):
+#     global current_function
+#     if event.key == 'tab':
+#         current_function = (current_function + 1) % len(functions)
+#         line.set_ydata(functions[current_function])
+#         ax.set_title(function_names[current_function])
+#         fig.canvas.draw()
+
+# # Connect the toggle_function function to the key press event
+# fig.canvas.mpl_connect('key_press_event', toggle_function)
+
+# # Define a function to track the mouse movement and show the trajectory of the graph
+# def track_mouse(event):
+#     if event.inaxes:
+#         x, y = event.xdata, event.ydata
+#         ax.set_title(f'{function_names[current_function]} | x={x:.2f}, y={y:.2f}')
+#         fig.canvas.draw()
+
+# # Connect the track_mouse function to the mouse movement event
+# fig.canvas.mpl_connect('motion_notify_event', track_mouse)
+
+# # Show the plot
+# plt.show()
+

@@ -86,11 +86,12 @@ class GraphingCalculator:
         # Add labels and title
         plt.xlabel("X-Axis")
         plt.ylabel("Y-Axis")
-        plt.legend()    
+        plt.legend(loc="bottom right")    
         # Show the plot
         plt.show()
-
-plt.grid()
-root = tk.Tk()
-graphing_calculator = GraphingCalculator(root)
-root.mainloop()
+        
+if __name__ == "main":
+    plt.grid()
+    root = tk.Tk()
+    graphing_calculator = GraphingCalculator(root)
+    root.mainloop()
