@@ -9,7 +9,6 @@ class GraphingCalculator:
         self.master = master
         master.title("Graphing Calculator")
         self.plot_handles = {}  # keep track of plotted functions and their colors
-        self.function_names =  []
 
         master.resizable(True, True)
         master.minsize(300, 300)
@@ -55,6 +54,7 @@ class GraphingCalculator:
             handle = self.plot_handles[function_str]
             handle.set_color(clr)
             messagebox.showwarning(title="Warning", message="The function already exists")
+            
         else:
             num_points = abs(int(x_range[0])) + abs(int(x_range[1]))
             # Define the x values to plot
@@ -83,12 +83,11 @@ class GraphingCalculator:
             # Create the plot
             handle, = plt.plot(x_vals, y_vals, label=function_str, color=clr)
             self.plot_handles[function_str] = handle
-            self.function_names.append(function_str)
 
         # Add labels and title
         plt.xlabel("X-Axis")
         plt.ylabel("Y-Axis")
-        plt.legend(loc="bottom right")    
+        plt.legend()    
         # Show the plot
         plt.show()
         
