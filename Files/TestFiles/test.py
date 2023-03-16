@@ -92,8 +92,7 @@ class GraphingCalculator:
         # Show the plot
         plt.show()
         
-if __name__ == "main":
-    plt.grid()
-    root = tk.Tk()
-    graphing_calculator = GraphingCalculator(root)
-    root.mainloop()
+plt.grid()
+root = tk.Tk()
+graphing_calculator = GraphingCalculator(root)
+root.mainloop()
