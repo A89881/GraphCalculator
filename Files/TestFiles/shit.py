@@ -322,3 +322,76 @@ More Constant sheit
 
 # # print the result
 # print("The result of the expression is:", result)
+
+# import matplotlib.pyplot as plt
+# import numpy as np
+# import math
+# import tkinter as tk
+# from tkinter import messagebox
+# from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+
+# class GraphingCalculator:
+#     def __init__(self, master):
+#         self.master = master
+#         master.title("Graphing Calculator")
+#         self.plot_handles = []  # keep track of plotted functions and their colors
+#         self.current_plot = 0   # index of current plot
+#         self.fig, self.ax = plt.subplots()
+#         self.canvas = FigureCanvasTkAgg(self.fig, master=master)
+#         self.canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+#         self.canvas.mpl_connect('motion_notify_event', self.on_mouse_move)
+
+#         master.resizable(True, True)
+#         master.minsize(300, 300)
+
+#         # Create function input label and entry box
+#         self.function_label = tk.Label(master, text="function")
+#         self.function_label.pack()
+#         self.function_entry = tk.Entry(master)
+#         self.function_entry.pack()
+
+#         # Create x range input label and entry boxes
+#         self.x_min_label = tk.Label(master, text="x-min: ")
+#         self.x_min_label.pack()
+#         self.x_min_entry = tk.Entry(master)
+#         self.x_min_entry.pack()
+
+#         self.x_max_label = tk.Label(master, text="x-max: ")
+#         self.x_max_label.pack()
+#         self.x_max_entry = tk.Entry(master)
+#         self.x_max_entry.pack()
+
+#         # Create color input label and entry box
+#         self.color_label = tk.Label(master, text="color: ")
+#         self.color_label.pack()
+#         self.color_entry = tk.Entry(master)
+#         self.color_entry.pack()
+
+#         # Create plot button
+#         self.plot_button = tk.Button(master, text="plot", command=self.plot_function)
+#         self.plot_button.pack()
+
+#         # Create coordinates display box
+#         self.coord_text = tk.StringVar()
+#         self.coord_label = tk.Label(master, textvariable=self.coord_text)
+#         self.coord_label.pack()
+
+#         # Bind the tab key to toggle between plots
+#         master.bind('<Tab>', self.toggle_plot)
+
+#     def toggle_plot(self, event):
+#         if len(self.plot_handles) > 1:
+#             self.current_plot = (self.current_plot + 1) % len(self.plot_handles)
+#             self.update_plot()
+
+#     def update_plot(self):
+#         self.ax.clear()
+#         handle = self.plot_handles[self.current_plot]
+#         self.ax.plot(handle['x_vals'], handle['y_vals'], label=handle['function'], color=handle['color'])
+#         plt.xlabel("X-Axis")
+#         plt.ylabel("Y-Axis")
+#         plt.legend()
+#         self.canvas.draw()
+
+#     def on_mouse_move(self, event):
+#         if event.inaxes
