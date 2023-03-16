@@ -39,6 +39,29 @@ class GraphingCalculator:
         # Create plot button
         self.plot_button = tk.Button(master, text="plot", command=self.plot_function)
         self.plot_button.pack()
+    
+    def is_constant_function(self, function_str):
+        try:
+            namespace = {
+                'pi': math.pi,
+                'e': math.e,
+                'exp': np.exp,
+                'sin': np.sin,
+                'cos': np.cos,
+                'tan': np.tan,
+                'log': np.log10,
+                'ln': np.log,
+                'sqrt': np.sqrt
+            }
+            namespace.update(math.__dict__)
+            c = eval(function_str, namespace)
+            if isinstance(c, (int, float)):
+                return c
+            else:
+                return None
+        except:
+            return None
+
 
     def plot_function(self):
         # Get function string and x range from entry boxes
@@ -54,7 +77,11 @@ class GraphingCalculator:
             handle = self.plot_handles[function_str]
             handle.set_color(clr)
             messagebox.showwarning(title="Warning", message="The function already exists")
-            
+        if self.is_constant_function(function_str) is not None:
+            x_vals = np.linspace(x_min, x_max, 2)
+            y_vals = np.full(2, self.is_constant_function(function_str))
+            handle, = plt.plot(x_vals, y_vals, label=function_str, color=clr)
+            self.plot_handles[function_str] = handle
         else:
             num_points = abs(int(x_range[0])) + abs(int(x_range[1]))
             # Define the x values to plot
