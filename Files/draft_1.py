@@ -54,6 +54,7 @@ class GraphingCalculator:
             handle = self.plot_handles[function_str]
             handle.set_color(clr)
             messagebox.showwarning(title="Warning", message="The function already exists")
+            
         else:
             num_points = abs(int(x_range[0])) + abs(int(x_range[1]))
             # Define the x values to plot
