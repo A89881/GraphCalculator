@@ -395,3 +395,27 @@ More Constant sheit
 
 #     def on_mouse_move(self, event):
 #         if event.inaxes
+
+# import matplotlib.pyplot as plt
+
+# # create an example plot
+# fig, ax = plt.subplots()
+# ax.plot([1, 2, 3], [4, 5, 6])
+
+# # center the axis
+# ax.spines['left'].set_position('center') # type: ignore
+# ax.spines['bottom'].set_position('center') # type: ignore
+# ax.spines['right'].set_color('none')
+# ax.spines['top'].set_color('none')
+# ax.xaxis.set_ticks_position('bottom')
+# ax.yaxis.set_ticks_position('left')
+# ax.xaxis.set_label_coords(0.5, -0.1)
+# ax.yaxis.set_label_coords(-0.1, 0.5)
+
+# # add labels and title
+# ax.set_xlabel('X-axis', position=(0.5, -0.05))
+# ax.set_ylabel('Y-axis', position=(-0.1, 0.5))
+# ax.set_title('Centered Axis')
+
+# plt.show()
+
