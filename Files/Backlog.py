@@ -1,4 +1,5 @@
 from tkinter import messagebox
+from typing import List
 import matplotlib.pyplot as plt
 import numpy as np
 import math
@@ -9,6 +10,7 @@ class GraphingCalculator:
         self.master = master
         master.title("Graphing Calculator")
         self.plot_handles = {}  # keep track of plotted functions and their colors
+        self.plot_functions: List[str] = []  # list of plotted function strings
 
         master.resizable(True, True)
         master.minsize(300, 300)
@@ -77,11 +79,12 @@ class GraphingCalculator:
             handle = self.plot_handles[function_str]
             handle.set_color(clr)
             messagebox.showwarning(title="Warning", message="The function already exists")
-        if self.is_constant_function(function_str) is not None:
+        if self.is_constant_function(function_str) is not None and function_str not in self.plot_handles:
             x_vals = np.linspace(x_min, x_max, 2)
             y_vals = np.full(2, self.is_constant_function(function_str))
             handle, = plt.plot(x_vals, y_vals, label=function_str, color=clr)
             self.plot_handles[function_str] = handle
+            self.plot_functions.append(function_str) 
         else:
             num_points = abs(int(x_range[0])) + abs(int(x_range[1]))
             # Define the x values to plot
@@ -89,6 +92,7 @@ class GraphingCalculator:
                 num_points = 1000
             else:
                 num_points = abs(int(x_range[0])) + abs(int(x_range[1]))
+
             x_vals = np.linspace(x_range[0], x_range[1], num_points)
 
             # Create a namespace for the math functions
@@ -107,9 +111,15 @@ class GraphingCalculator:
                 print("Invalid function.")
                 return
 
+        if function_str not in self.plot_handles:
             # Create the plot
             handle, = plt.plot(x_vals, y_vals, label=function_str, color=clr)
             self.plot_handles[function_str] = handle
+            self.plot_functions.append(function_str) 
+            print(self.plot_handles)
+        else:
+            pass
+        
 
         # Add labels and title
         plt.xlabel("X-Axis")
