@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math
 import tkinter as tk
-from IPython.display import set_matplotlib_formats
 
 class GraphingCalculator:
     def __init__(self, master):
@@ -23,6 +22,12 @@ class GraphingCalculator:
         self.function_entry = tk.Entry(master)
         self.function_entry.pack()
 
+        # Create color input label and entry box
+        self.color_label = tk.Label(master, text="color: ")
+        self.color_label.pack()
+        self.color_entry = tk.Entry(master)
+        self.color_entry.pack()
+
         # Create x range input label and entry boxes
         self.x_min_label = tk.Label(master, text="x-min: ")
         self.x_min_label.pack()
@@ -34,17 +39,22 @@ class GraphingCalculator:
         self.x_max_entry = tk.Entry(master)
         self.x_max_entry.pack()
 
-        # Create color input label and entry box
-        self.color_label = tk.Label(master, text="color: ")
-        self.color_label.pack()
-        self.color_entry = tk.Entry(master)
-        self.color_entry.pack()
+        self.y_min_label = tk.Label(master, text="y-min: ")
+        self.y_min_label.pack()
+        self.y_min_entry = tk.Entry(master)
+        self.y_min_entry.pack()
+
+        self.y_max_label = tk.Label(master, text="y-max: ")
+        self.y_max_label.pack()
+        self.y_max_entry = tk.Entry(master)
+        self.y_max_entry.pack()
 
         # Create plot button
-        self.plot_button = tk.Button(master, text="plot", command=self.stuff)
+        self.plot_button = tk.Button(master, text="plot", command=self.graph)
         self.plot_button.pack()
+
         self.ax.grid()
-        self.set_matplotlib_formats("retina") # type: ignore
+        plt.tight_layout()    
     
     def is_constant_function(self, function_str):
         try:
@@ -71,10 +81,10 @@ class GraphingCalculator:
 
     def plot_function(self, ax):
         # Get function string and x range from entry boxes
-        function_str = self.function_entry.get()
-        x_min = float(self.x_min_entry.get())
-        x_max = float(self.x_max_entry.get())
-        x_range = (x_min, x_max)
+        function_str = self.function_entry.get()   
+        l_limit = -10**15
+        u_limit = 10**15
+        x_range = (l_limit, u_limit)
         clr = str(self.color_entry.get())
 
         # Check if the function has already been plotted
@@ -83,21 +93,21 @@ class GraphingCalculator:
             handle = self.plot_handles[function_str]
             handle.set_color(clr)
             messagebox.showwarning(title="Warning", message="The function already exists")
+
         if self.is_constant_function(function_str) is not None and function_str not in self.plot_handles:
-            x_vals = np.linspace(x_min, x_max, 2)
+
+            x_vals = np.linspace(l_limit, u_limit, 2)
             y_vals = np.full(2, self.is_constant_function(function_str))
+
             handle, = ax.plot(x_vals, y_vals, label=function_str, color=clr)
             self.plot_handles[function_str] = handle
             self.plot_functions.append(function_str)
             handle.set_data(x_vals, y_vals)  
-        else:
-            num_points = abs(int(x_range[0])) + abs(int(x_range[1]))
-            # Define the x values to plot
-            if num_points < 1000:
-                num_points = 1000
-            else:
-                num_points = abs(int(x_range[0])) + abs(int(x_range[1]))
 
+        else:
+            num_points = 1000
+            # Define the x values to plot
+            
             x_vals = np.linspace(x_range[0], x_range[1], num_points)
 
             # Create a namespace for the math functions
@@ -124,14 +134,22 @@ class GraphingCalculator:
             print(self.plot_handles)
         else:
             pass
+
+        x_min = float(self.x_min_entry.get())
+        x_max = float(self.x_max_entry.get())
+        y_min = float(self.y_min_entry.get())
+        y_max = float(self.y_max_entry.get())
+        ax.set_xlim(x_min, x_max)
+        ax.set_ylim(y_min, y_max)
+        # Add labels and title
+        ax.spines['left'].set_position('center')
+        ax.spines['bottom'].set_position('center')
+        ax.spines['right'].set_color('none')
+        ax.spines['top'].set_color('none')
         
 
-        # Add labels and title
-        ax.set_xlabel("X-Axis")
-        ax.set_ylabel("Y-Axis")
-        ax.legend()    
 
-    def stuff(self):
+    def graph(self):
         self.plot_function(self.ax)
         plt.show()
 
