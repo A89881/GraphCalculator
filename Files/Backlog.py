@@ -10,7 +10,7 @@ class GraphingCalculator:
         self.master = master
         master.title("Graphing Calculator")
         self.plot_handles = {}  # keep track of plotted functions and their colors
-        self.plot_functions: List[str] = []  # list of plotted function strings
+        self.functions_list: List[str] = []  # list of plotted function strings
 
         master.resizable(True, True)
         master.minsize(300, 300)
@@ -84,7 +84,7 @@ class GraphingCalculator:
             y_vals = np.full(2, self.is_constant_function(function_str))
             handle, = plt.plot(x_vals, y_vals, label=function_str, color=clr)
             self.plot_handles[function_str] = handle
-            self.plot_functions.append(function_str) 
+            self.functions_list.append(function_str) 
         else:
             num_points = abs(int(x_range[0])) + abs(int(x_range[1]))
             # Define the x values to plot
@@ -115,7 +115,7 @@ class GraphingCalculator:
             # Create the plot
             handle, = plt.plot(x_vals, y_vals, label=function_str, color=clr)
             self.plot_handles[function_str] = handle
-            self.plot_functions.append(function_str) 
+            self.functions_list.append(function_str) 
             print(self.plot_handles)
         else:
             pass

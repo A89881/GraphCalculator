@@ -181,3 +181,8 @@ Toggles between different graphs with different plots
 # # Show the plot
 # plt.show()
 
+# # Define the x values to plot
+# if num_points < 1000:
+#     num_points = 1000
+# else:
+#     num_points = abs(int(x_range[0])) + abs(int(x_range[1]))
