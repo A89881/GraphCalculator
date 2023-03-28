@@ -96,7 +96,15 @@ class GraphingCalculator:
         self.ax.set_xbound(x_min, x_max)
         self.ax.set_ybound(y_min, y_max)
 
+        # x1 = [i for i in range(x_min, x_max)] # type: ignore
+        # y1 = [i for i in range(y_min, y_max)]
 
+
+
+       
+        # Set the ticks
+        self.ax.set_xticks(np.linspace(x_min, x_max, 11))
+        self.ax.set_yticks(np.linspace(y_min, y_max, 11))
 
         # Check if the function has already been plotted
         if function_str in self.plot_handles:
@@ -118,9 +126,9 @@ class GraphingCalculator:
             namespace = {'x': x_vals}
             namespace.update(math.__dict__)
             namespace.update({'exp': np.exp, 'sin': np.sin, 
-                              'cos': np.cos, 'tan': np.tan,
-                              'log': np.log10, 'ln': np.log, 
-                              'sqrt': np.sqrt}) # type: ignore
+                            'cos': np.cos, 'tan': np.tan,
+                            'log': np.log10, 'ln': np.log, 
+                            'sqrt': np.sqrt}) # type: ignore
 
             # Evaluate the function for each x value
             try:
@@ -143,10 +151,18 @@ class GraphingCalculator:
         # Add labels and title
         # plt.xlabel("X-Axis")
         # plt.ylabel("Y-Axis")
+
+        self.ax.set_xlim(xmin=x_min, xmax=x_max)  
+        self.ax.set_ylim(ymin=y_min, ymax=y_max)
+        self.ax.spines["left"].set_position("zero") #type:ignore
+        self.ax.spines["bottom"].set_position("zero") #type:ignore
+        self.ax.spines["right"].set_visible(False) #type:ignore
+        self.ax.spines["top"].set_visible(False) #type:ignore
+
         self.ax.legend()    
         # Show the plot
         plt.show()
-        
+
 
 root = tk.Tk()
 graphing_calculator = GraphingCalculator(root)

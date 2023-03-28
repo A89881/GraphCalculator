@@ -187,28 +187,108 @@ Toggles between different graphs with different plots
 # else:
 #     num_points = abs(int(x_range[0])) + abs(int(x_range[1]))
 
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
-fig, ax = plt.subplots()
+# fig, ax = plt.subplots()
 
-# turn on the grid and set its color
-ax.grid(True, color='gray')
+# # turn on the grid and set its color
+# ax.grid(True, color='gray')
 
-# set the tick positions and labels
-ax.set_xticks([0, 1, 2])
-ax.set_xticklabels(['A', 'B', 'C'])
-ax.set_yticks([0, 1, 2])
-ax.set_yticklabels(['X', 'Y', 'Z'])
+# # set the tick positions and labels
+# ax.set_xticks([0, 1, 2])
+# ax.set_xticklabels(['A', 'B', 'C'])
+# ax.set_yticks([0, 1, 2])
+# ax.set_yticklabels(['X', 'Y', 'Z'])
 
-# set the tick positions and labels to be centered
-ax.tick_params(axis='both', which='both', direction='in', pad=10)
-ax.xaxis.set_ticks_position('both')
-ax.xaxis.set_label_position('bottom')
-ax.yaxis.set_ticks_position('both')
-ax.yaxis.set_label_position('left')
+# # set the tick positions and labels to be centered
+# ax.tick_params(axis='both', which='both', direction='in', pad=10)
+# ax.xaxis.set_ticks_position('both')
+# ax.xaxis.set_label_position('bottom')
+# ax.yaxis.set_ticks_position('both')
+# ax.yaxis.set_label_position('left')
 
-# set the axis limits
-ax.set_xlim([-0.5, 2.5]) # type: ignore
-ax.set_ylim([-0.5, 2.5]) # type: ignore
+# # set the axis limits
+# ax.set_xlim([-0.5, 2.5]) # type: ignore
+# ax.set_ylim([-0.5, 2.5]) # type: ignore
 
-plt.show()
+# plt.show()
+
+      # # Get function string and x range from entry boxes
+      #   function_str = self.function_entry.get()
+      #   x_min = float(self.x_min_entry.get())
+      #   x_max = float(self.x_max_entry.get())
+      #   x_range = (x_min, x_max)
+
+      #   y_min = float(self.y_min_entry.get())
+      #   y_max = float(self.y_max_entry.get())
+
+      #   clr = str(self.color_entry.get())
+
+      #   num_points = 1000
+
+      #   self.ax.set_xbound(x_min, x_max)
+      #   self.ax.set_ybound(y_min, y_max)
+
+      #   # Check if the function has already been plotted
+      #   if function_str in self.plot_handles:
+      #       # Update the color of the existing plot
+      #       handle = self.plot_handles[function_str]
+      #       handle.set_color(clr)
+      #       messagebox.showwarning(title="Warning", message="The function already exists")
+      #   if self.is_constant_function(function_str) is not None and function_str not in self.plot_handles:
+      #       x_vals = np.linspace(x_min, x_max, 2)
+      #       y_vals = np.full(2, self.is_constant_function(function_str))
+      #       handle, = self.ax.plot(x_vals, y_vals, label=function_str, color=clr)
+      #       self.plot_handles[function_str] = handle
+      #       self.functions_list.append(function_str) 
+      #   else:
+            
+      #       x_vals = np.linspace(x_range[0], x_range[1], num_points)
+
+      #       # Create a namespace for the math functions
+      #       namespace = {'x': x_vals}
+      #       namespace.update(math.__dict__)
+      #       namespace.update({'exp': np.exp, 'sin': np.sin, 
+      #                       'cos': np.cos, 'tan': np.tan,
+      #                       'log': np.log10, 'ln': np.log, 
+      #                       'sqrt': np.sqrt}) # type: ignore
+
+      #       # Evaluate the function for each x value
+      #       try:
+      #           y_vals = eval(function_str, namespace)
+      #       except:
+      #           messagebox.showerror(title="Error", message="Invalid function.")
+      #           print("Invalid function.")
+      #           return
+
+      #   if function_str not in self.plot_handles:
+      #       # Create the plot
+      #       handle, = self.ax.plot(x_vals, y_vals, label=function_str, color=clr)
+      #       self.plot_handles[function_str] = handle
+      #       self.functions_list.append(function_str) 
+      #       print(self.plot_handles)
+      #   else:
+      #       pass
+
+      #   # Set the ticks on the x and y axes
+      #   self.ax.set_xticks(np.linspace(x_min, x_max, 5))
+      #   self.ax.set_yticks(np.linspace(y_min, y_max, 5))
+
+      #   # Add labels and title
+      #   self.ax.set_xlabel("X-Axis")
+      #   self.ax.set_ylabel("Y-Axis")
+      #   self.ax.set_title("Graph")
+
+      #   self.ax.legend()
+
+      #   # Show the plot
+      #   plt.show()
+
+
+      #       # Add labels and title
+      #       # plt.xlabel("X-Axis")
+      #       # plt.ylabel("Y-Axis")
+      #       self.ax.legend()    
+      #       # Show the plot
+      #       plt.show()
+        
