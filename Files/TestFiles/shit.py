@@ -186,3 +186,29 @@ Toggles between different graphs with different plots
 #     num_points = 1000
 # else:
 #     num_points = abs(int(x_range[0])) + abs(int(x_range[1]))
+
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+
+# turn on the grid and set its color
+ax.grid(True, color='gray')
+
+# set the tick positions and labels
+ax.set_xticks([0, 1, 2])
+ax.set_xticklabels(['A', 'B', 'C'])
+ax.set_yticks([0, 1, 2])
+ax.set_yticklabels(['X', 'Y', 'Z'])
+
+# set the tick positions and labels to be centered
+ax.tick_params(axis='both', which='both', direction='in', pad=10)
+ax.xaxis.set_ticks_position('both')
+ax.xaxis.set_label_position('bottom')
+ax.yaxis.set_ticks_position('both')
+ax.yaxis.set_label_position('left')
+
+# set the axis limits
+ax.set_xlim([-0.5, 2.5]) # type: ignore
+ax.set_ylim([-0.5, 2.5]) # type: ignore
+
+plt.show()

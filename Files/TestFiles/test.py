@@ -54,6 +54,7 @@ class GraphingCalculator:
         self.plot_button.pack()
         
         self.fig, self.ax = plt.subplots()
+        self.ax.grid()
     
     def is_constant_function(self, function_str):
         try:
@@ -146,7 +147,7 @@ class GraphingCalculator:
         # Show the plot
         plt.show()
         
-plt.grid()
+
 root = tk.Tk()
 graphing_calculator = GraphingCalculator(root)
 root.mainloop()
