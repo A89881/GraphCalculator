@@ -53,8 +53,7 @@ class GraphingCalculator:
         self.y_max_entry = tk.Entry(master)
         self.y_max_entry.pack()
 
-
-        self.window_button = tk.Button(master, text="plot", command=self.change_window)
+        self.window_button = tk.Button(master, text="change window", command=self.change_window)
         self.window_button.pack()
 
        
@@ -110,8 +109,8 @@ class GraphingCalculator:
         tick_range_y = len(y1)
 
 
-        x_min_inf = -10**15
-        x_max_inf = -10**15
+        x_min_inf = float(-10**15)
+        x_max_inf = float(-10**15)
         x_range = (x_min_inf, x_max_inf) 
 
       
@@ -164,6 +163,9 @@ class GraphingCalculator:
         # Add labels and title
         # plt.xlabel("X-Axis")
         # plt.ylabel("Y-Axis")
+        
+
+
 
         self.ax.set_xlim(xmin=x_min, xmax=x_max)  
         self.ax.set_ylim(ymin=y_min, ymax=y_max)
@@ -195,6 +197,11 @@ class GraphingCalculator:
 
         self.ax.set_xlim(xmin=x_min, xmax=x_max)  
         self.ax.set_ylim(ymin=y_min, ymax=y_max)
+        self.ax.spines["left"].set_position("zero") #type:ignore
+        self.ax.spines["bottom"].set_position("zero") #type:ignore
+        self.ax.spines["right"].set_visible(False) #type:ignore
+        self.ax.spines["top"].set_visible(False) #type:ignore
+
 
         plt.show()
 
