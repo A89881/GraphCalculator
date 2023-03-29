@@ -189,6 +189,10 @@ Toggles between different graphs with different plots
 
 # import matplotlib.pyplot as plt
 
+"""
+Ticks scaling i guess
+"""
+
 # fig, ax = plt.subplots()
 
 # # turn on the grid and set its color
@@ -291,4 +295,29 @@ Toggles between different graphs with different plots
       #       self.ax.legend()    
       #       # Show the plot
       #       plt.show()
-        
+
+
+"""
+Change window function
+"""       
+# def change_graph_window(self):
+#       x_min = float(self.x_min_entry.get())
+#       x_max = float(self.x_max_entry.get())
+
+#       y_min = float(self.y_min_entry.get())
+#       y_max = float(self.y_max_entry.get())
+
+#       x1 = [i for i in range(int(x_min), int(x_max))] # type: ignore
+#       y1 = [i for i in range(int(y_min), int(y_max))] # type: ignore
+
+#       tick_range_x = len(x1)
+#       tick_range_y = len(y1)
+
+#       # Set the ticks
+#       self.ax.set_xticks(np.linspace(x_min, x_max, tick_range_x+1))
+#       self.ax.set_yticks(np.linspace(y_min, y_max, tick_range_y+1))
+
+#       self.ax.set_xlim(xmin=x_min, xmax=x_max)  
+#       self.ax.set_ylim(ymin=y_min, ymax=y_max)
+
+#       plt.show()

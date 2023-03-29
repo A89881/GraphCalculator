@@ -93,18 +93,18 @@ class GraphingCalculator:
 
         num_points = 1000
 
-        self.ax.set_xbound(x_min, x_max)
-        self.ax.set_ybound(y_min, y_max)
+        # self.ax.set_xbound(x_min, x_max)
+        # self.ax.set_ybound(y_min, y_max)
 
-        # x1 = [i for i in range(x_min, x_max)] # type: ignore
-        # y1 = [i for i in range(y_min, y_max)]
+        x1 = [i for i in range(int(x_min), int(x_max))] # type: ignore
+        y1 = [i for i in range(int(y_min), int(y_max))] # type: ignore
 
-
-
-       
+        tick_range_x = len(x1)
+        tick_range_y = len(y1)
+      
         # Set the ticks
-        self.ax.set_xticks(np.linspace(x_min, x_max, 11))
-        self.ax.set_yticks(np.linspace(y_min, y_max, 11))
+        self.ax.set_xticks(np.linspace(x_min, x_max, tick_range_x+1))
+        self.ax.set_yticks(np.linspace(y_min, y_max, tick_range_y+1))
 
         # Check if the function has already been plotted
         if function_str in self.plot_handles:
@@ -162,6 +162,8 @@ class GraphingCalculator:
         self.ax.legend()    
         # Show the plot
         plt.show()
+
+    
 
 
 root = tk.Tk()
