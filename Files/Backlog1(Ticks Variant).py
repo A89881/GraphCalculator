@@ -21,16 +21,6 @@ class GraphingCalculator:
         self.function_entry = tk.Entry(master)
         self.function_entry.pack()
 
-        # Create color input label and entry box
-        self.color_label = tk.Label(master, text="color: ")
-        self.color_label.pack()
-        self.color_entry = tk.Entry(master)
-        self.color_entry.pack()
-
-        # Create plot button
-        self.plot_button = tk.Button(master, text="plot", command=self.plot_function)
-        self.plot_button.pack()
-
         # Create x range input label and entry boxes
         self.x_min_label = tk.Label(master, text="x-min: ")
         self.x_min_label.pack()
@@ -53,13 +43,16 @@ class GraphingCalculator:
         self.y_max_entry = tk.Entry(master)
         self.y_max_entry.pack()
 
+        # Create color input label and entry box
+        self.color_label = tk.Label(master, text="color: ")
+        self.color_label.pack()
+        self.color_entry = tk.Entry(master)
+        self.color_entry.pack()
 
-        self.window_button = tk.Button(master, text="plot", command=self.change_window)
-        self.window_button.pack()
-
-       
-
-      
+        # Create plot button
+        self.plot_button = tk.Button(master, text="plot", command=self.plot_function)
+        self.plot_button.pack()
+        
         self.fig, self.ax = plt.subplots()
         self.ax.grid()
     
@@ -91,7 +84,7 @@ class GraphingCalculator:
         function_str = self.function_entry.get()
         x_min = float(self.x_min_entry.get())
         x_max = float(self.x_max_entry.get())
-     
+        x_range = (x_min, x_max)
 
         y_min = float(self.y_min_entry.get())
         y_max = float(self.y_max_entry.get())
@@ -108,12 +101,6 @@ class GraphingCalculator:
 
         tick_range_x = len(x1)
         tick_range_y = len(y1)
-
-
-        x_min_inf = -10**15
-        x_max_inf = -10**15
-        x_range = (x_min_inf, x_max_inf) 
-
       
         # Set the ticks
         self.ax.set_xticks(np.linspace(x_min, x_max, tick_range_x+1))
@@ -126,7 +113,7 @@ class GraphingCalculator:
             handle.set_color(clr)
             messagebox.showwarning(title="Warning", message="The function already exists")
         if self.is_constant_function(function_str) is not None and function_str not in self.plot_handles:
-            x_vals = np.linspace(x_min_inf, x_max_inf, 2)
+            x_vals = np.linspace(x_min, x_max, 2)
             y_vals = np.full(2, self.is_constant_function(function_str))
             handle, = self.ax.plot(x_vals, y_vals, label=function_str, color=clr)
             self.plot_handles[function_str] = handle
@@ -176,27 +163,7 @@ class GraphingCalculator:
         # Show the plot
         plt.show()
 
-    def change_window(self):
-        x_min = float(self.x_min_entry.get())
-        x_max = float(self.x_max_entry.get())
-      
-        y_min = float(self.y_min_entry.get())
-        y_max = float(self.y_max_entry.get())
-
-        x1 = [i for i in range(int(x_min), int(x_max))] # type: ignore
-        y1 = [i for i in range(int(y_min), int(y_max))] # type: ignore
-
-        tick_range_x = len(x1)
-        tick_range_y = len(y1)
-       
-        # Set the ticks
-        self.ax.set_xticks(np.linspace(x_min, x_max, tick_range_x+1))
-        self.ax.set_yticks(np.linspace(y_min, y_max, tick_range_y+1))
-
-        self.ax.set_xlim(xmin=x_min, xmax=x_max)  
-        self.ax.set_ylim(ymin=y_min, ymax=y_max)
-
-        plt.show()
+    
 
 
 root = tk.Tk()
