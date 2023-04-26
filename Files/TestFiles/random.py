@@ -399,3 +399,387 @@ Update all graph function if new x_min and x_max
 #         self.fig.canvas.draw()
       
 #         plt.show()
+
+"""
+Proper plot_function
+"""
+
+   # def plot_function(self):
+    #     # Get function string and x range from entry boxes
+    #     function_str = self.function_entry.get()
+
+    #     if float(self.x_min_entry.get()) or float(self.x_min_entry.get()) != ValueError:
+    #       x_min = float(self.x_min_entry.get())
+    #       x_max = float(self.x_max_entry.get())
+    #     else:
+    #       x_min = float(-10)
+    #       x_max = float(10)
+
+
+    #     x_range = (x_min, x_max)
+
+    #     y_min = float(self.y_min_entry.get())
+    #     y_max = float(self.y_max_entry.get())
+
+    #     clr = str(self.color_entry.get())
+
+    #     num_points = 1000
+
+    
+    #     # Check if the function has already been plotted
+    #     if function_str in self.plot_handles:
+    #         # Update the color of the existing plot
+    #         handle = self.plot_handles[function_str]
+    #         handle.set_color(clr)
+    #         messagebox.showwarning(title="Warning", message="The function already exists")
+    #     if self.is_constant_function(function_str) is not None and function_str not in self.plot_handles:
+    #         x_vals = np.linspace(x_min, x_max, 2)
+    #         y_vals = np.full(2, self.is_constant_function(function_str))
+    #         handle, = self.ax.plot(x_vals, y_vals, label=function_str, color=clr)
+    #         self.plot_handles[function_str] = handle
+    #         self.functions_list.append(function_str) 
+    #     else:
+            
+    #         x_vals = np.linspace(x_range[0], x_range[1], num_points)
+
+    #         # Create a namespace for the math functions
+    #         namespace = {'x': x_vals}
+    #         namespace.update(math.__dict__)
+    #         namespace.update({'exp': np.exp, 'sin': np.sin, 
+    #                         'cos': np.cos, 'tan': np.tan,
+    #                         'log': np.log10, 'ln': np.log, 
+    #                         'sqrt': np.sqrt}) # type: ignore
+
+    #         # Evaluate the function for each x value
+    #         try:
+    #             y_vals = eval(function_str, namespace)
+    #         except:
+    #             messagebox.showerror(title="Error", message="Invalid function.")
+    #             print("Invalid function.")
+    #             return
+
+    #     if function_str not in self.plot_handles:
+    #         # Create the plot
+    #         handle, = self.ax.plot(x_vals, y_vals, label=function_str, color=clr)
+    #         self.plot_handles[function_str] = handle
+    #         self.functions_list.append(function_str) 
+    #         print(self.plot_handles)
+    #     else:
+    #         pass
+        
+
+   
+    #     self.ax.set_xlim(xmin=x_min, xmax=x_max)  
+    #     self.ax.set_ylim(ymin=y_min, ymax=y_max)
+    #     self.ax.spines["left"].set_position("zero") #type:ignore
+    #     self.ax.spines["bottom"].set_position("zero") #type:ignore
+    #     self.ax.spines["right"].set_visible(False) #type:ignore
+    #     self.ax.spines["top"].set_visible(False) #type:ignore
+
+    #     self.ax.legend()    
+    #     # Show the plot
+    #     plt.show()
+
+"""
+This is confusing basically
+"""
+
+
+#  def plot_function(self):
+#         # Get function string and x range from entry boxes
+#         function_str = self.function_entry.get()
+
+#         if self.x_min_entry.get() and self.x_max_entry.get():
+#             try:
+#                 x_min = float(self.x_min_entry.get())
+#                 x_max = float(self.x_max_entry.get())
+#             except ValueError:
+#                 messagebox.showerror(title="Error", message="Invalid x range.")
+#                 return
+#         else:
+#             messagebox.showerror(title="Error", message="Please enter x range.")
+#             return
+
+#         y_min = float(self.y_min_entry.get())
+#         y_max = float(self.y_max_entry.get())
+
+#         clr = str(self.color_entry.get())
+
+#         num_points = 1000
+
+#         # Check if the function has already been plotted
+#         if function_str in self.plot_handles:
+#             # Update the color of the existing plot
+#             handle = self.plot_handles[function_str]
+#             handle.set_color(clr)
+#             messagebox.showwarning(title="Warning", message="The function already exists, ")
+#         elif self.is_constant_function(function_str) is not None:
+#             x_vals = np.linspace(x_min, x_max, 2)
+#             y_vals = np.full(2, self.is_constant_function(function_str))
+#             handle, = self.ax.plot(x_vals, y_vals, label=function_str, color=clr)
+#             self.plot_handles[function_str] = handle
+#             self.functions_list.append(function_str) 
+#         else:
+#             x_vals = np.linspace(x_min, x_max, num_points)
+
+#             # Create a namespace for the math functions
+#             namespace = {'x': x_vals}
+#             namespace.update(math.__dict__)
+#             namespace.update({'exp': np.exp, 'sin': np.sin, 
+#                             'cos': np.cos, 'tan': np.tan,
+#                             'log': np.log10, 'ln': np.log, 
+#                             'sqrt': np.sqrt}) # type: ignore
+
+#             # Evaluate the function for each x value
+#             try:
+#                 y_vals = eval(function_str, namespace)
+#             except:
+#                 messagebox.showerror(title="Error", message="Invalid function.")
+#                 print("Invalid function.")
+#                 return
+
+#             if function_str not in self.plot_handles:
+#                 # Create the plot
+#                 handle, = self.ax.plot(x_vals, y_vals, label=function_str, color=clr)
+#                 self.plot_handles[function_str] = handle
+#                 self.functions_list.append(function_str) 
+#             else:
+#                 pass
+
+#         self.ax.set_xlim(x_min, x_max)  
+#         self.ax.set_ylim(y_min, y_max)
+#         self.ax.spines["left"].set_position("zero") #type:ignore
+#         self.ax.spines["bottom"].set_position("zero") #type: ignore 
+#         self.ax.spines["right"].set_visible(False) #type:ignore
+#         self.ax.spines["top"].set_visible(False) #type:ignore 
+#         self.master.after(100, self.master.update)  # force update the window to show the plot
+#         self.ax.legend()
+#         plt.show()
+
+# import matplotlib.pyplot as plt
+
+# # Generate some sample data
+# x = [1, 2, 3, 4, 5]
+# y = [2, 4, 6, 8, 10]
+
+# # Plot the data and get a reference to the line plot object
+# line, = plt.plot(x, y)
+
+# # Get the current x-data for the line plot
+# current_xdata = line.get_xdata()
+
+# # Update the x-min value
+# new_xmin = 0
+# new_xdata = [new_xmin] + current_xdata[1:]
+
+# # Set the new x-data for the line plot
+# line.set_xdata(new_xdata)
+
+# # Update the plot to show the changes
+# plt.show()
+
+"""
+Possible adjust
+"""
+
+# class PlotApp:
+#     def __init__(self, master):
+#         self.master = master
+#         self.plot = Figure(figsize=(6, 4), dpi=100)
+#         self.canvas = FigureCanvasTkAgg(self.plot, master=self.master)
+#         self.canvas.get_tk_widget().grid(row=1, column=0, columnspan=4, pady=10)
+
+#         self.xmin_label = Label(self.master, text='xmin:')
+#         self.xmin_label.grid(row=0, column=0, sticky=E, pady=5)
+#         self.xmin_entry = Entry(self.master)
+#         self.xmin_entry.grid(row=0, column=1, pady=5)
+
+#         self.xmax_label = Label(self.master, text='xmax:')
+#         self.xmax_label.grid(row=0, column=2, sticky=E, pady=5)
+#         self.xmax_entry = Entry(self.master)
+#         self.xmax_entry.grid(row=0, column=3, pady=5)
+
+#         self.plot_button = Button(self.master, text='Plot', command=self.plot_handles)
+#         self.plot_button.grid(row=2, column=0, pady=5)
+
+#         self.clear_button = Button(self.master, text='Clear', command=self.clear_handles)
+#         self.clear_button.grid(row=2, column=1, pady=5)
+
+#         self.adjust_button = Button(self.master, text='Adjust', command=self.adjust_handles)
+#         self.adjust_button.grid(row=2, column=2, pady=5)
+
+#         self.quit_button = Button(self.master, text='Quit', command=self.master.quit)
+#         self.quit_button.grid(row=2, column=3, pady=5)
+
+#         self.handles = []
+#         self.lines = []
+
+#     def plot_handles(self):
+#         x = np.linspace(-10, 10, 200)
+#         y = np.sin(x)
+
+#         handle_xvals = [float(h.get_x()) for h in self.handles]
+#         handle_yvals = [float(h.get_y()) for h in self.handles]
+
+#         for line in self.lines:
+#             line.remove()
+#         self.lines.clear()
+
+#         for i in range(len(handle_xvals)):
+#             line, = self.plot.plot(x + handle_xvals[i], y + handle_yvals[i], 'b-')
+#             self.lines.append(line)
+
+#         self.canvas.draw()
+
+#     def clear_handles(self):
+#         for handle in self.handles:
+#             handle.remove()
+#         self.handles.clear()
+
+#         for line in self.lines:
+#             line.remove()
+#         self.lines.clear()
+
+#         self.canvas.draw()
+
+#     def adjust_handles(self):
+#         xmin = float(self.xmin_entry.get())
+#         xmax = float(self.xmax_entry.get())
+
+#         for handle in self.handles:
+#             x, y = handle.get_xy()
+#             x_new = xmin + (x - self.xmin) * (xmax - xmin) / (self.xmax - self.xmin)
+#             handle.set_x(x_new)
+
+#         self.xmin = xmin
+#         self.xmax = xmax
+
+#         self.plot_handles()
+
+#     def on_click(self, event):
+#         if event.inaxes != self.plot.axes:
+#             return
+
+#         handle = self.plot.axvline(event.xdata, color='r')
+#         self.handles.append(handle)
+
+#         self.plot_handles()
+
+#     def run(self):
+#         self.plot_handles()
+#         self.plot.canvas.mpl_connect('button_press_event', self.on_click)
+#         self.master.mainloop()
+
+#  x_vals = np.linspace(x_min, x_max, num_points)
+#         # Create a namespace for the math functions
+#         namespace = {'x': x_vals}
+#         namespace.update(math.__dict__)
+#         namespace.update({'exp': np.exp, 'sin': np.sin, 
+#                         'cos': np.cos, 'tan': np.tan,
+#                         'log': np.log10, 'ln': np.log, 
+#                         'sqrt': np.sqrt,
+#                         "arcsin": np.arcsin,
+#                         "arccos": np.arccos,
+#                         "arctan": np.arctan, }) # type: ignore
+
+#         try:
+#              y_vals = eval(function_str, namespace)
+#         except:
+#             messagebox.showerror(title="Error", message="Invalid function.")
+#             print("Invalid function.")
+#             return
+
+
+#         for element in self.functions_list:
+#             if element in self.plot_handles:
+#                 handle, = self.ax.plot(x_vals, y_vals, label=function_str, color=clr)
+#                 self.plot_handles[element] = handle
+
+#                 handle, = self.ax.plot(x_vals, y_vals, label=function_str, color=clr)
+#                 self.plot_handles[function_str] = handle
+#                 self.functions_list.append(function_str)
+
+# import matplotlib.pyplot as plt
+
+# # Plot some data
+# x = [1, 2, 3, 4, 5]
+# y = [2, 4, 6, 8, 10]
+# plt.plot(x, y)
+
+# # Clear the plot
+
+# plt.pause(1)
+# plt.clf()
+
+# # Plot some other data
+# x2 = [1, 2, 3, 4, 5]
+# y2 = [1, 3, 5, 7, 9]
+# plt.plot(x2, y2)
+
+# # Show the plot
+# plt.show()
+
+#   if self.check_change(input=x_min, value=self.x_min) == False:
+#               x_min = self.x_min[-1]
+#             else:
+#               pass
+
+#             if self.check_change(input=x_max, value=self.x_max) == False:
+#               x_max = self.x_max[-1]
+#             else:
+#               pass
+            
+#             if self.check_change(input=y_min, value=self.y_min) == False:
+#               y_min = self.y_min[-1]
+#             else:
+#                 pass
+#             if self.check_change(input=y_max, value=self.y_max) == False:
+#               y_max = self.y_max[-1]
+#             else:
+#                 pass
+            
+#   def check_change(self, input, value):
+#       if input == value:
+#           return False
+#       else:
+#           return True
+
+# self.x_min.clear()
+# self.x_max.clear()
+# self.y_max.clear()
+# self.y_max.clear()
+
+# self.x_min.append(x_min)
+# self.x_max.append(x_max)
+
+# self.y_min.append(y_min)
+# self.y_max.append(y_max)
+
+   # # current window values
+        # self.x_min = []
+        # self.y_min = []
+        # self.x_max = []
+        # self.y_max = []
+
+# import matplotlib.pyplot as plt
+
+# # Plot some data
+# x = [1, 2, 3, 4, 5]
+# y1 = [2, 4, 6, 8, 10]
+# y2 = [1, 3, 5, 7, 9]
+# plt.plot(x, y1, label='Graph 1')
+# plt.plot(x, y2, label='Graph 2')
+
+# # Clear all lines
+# plt.pause(2)
+# plt.clf()
+
+# # Show the plot
+# plt.show()
+
+my_dict = {'a': 1, 'b': 2, 'c': 3}
+
+# Iterate through every key in the dictionary
+for key in my_dict.keys():
+    print(key)
+

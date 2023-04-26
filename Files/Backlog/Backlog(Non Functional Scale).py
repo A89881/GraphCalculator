@@ -56,6 +56,8 @@ class GraphingCalculator:
         self.fig, self.ax = plt.subplots()
         self.ax.grid()
     
+
+        
     def is_constant_function(self, function_str):
         try:
             namespace = {
@@ -67,7 +69,11 @@ class GraphingCalculator:
                 'tan': np.tan,
                 'log': np.log10,
                 'ln': np.log,
-                'sqrt': np.sqrt
+                'sqrt': np.sqrt,
+                "arcsin": np.arcsin,
+                "arccos": np.arccos,
+                "arctan": np.arctan, 
+
             }
             namespace.update(math.__dict__)
             c = eval(function_str, namespace)
@@ -77,128 +83,63 @@ class GraphingCalculator:
                 return None
         except:
             return None
-
-
-    # def plot_function(self):
-    #     # Get function string and x range from entry boxes
-    #     function_str = self.function_entry.get()
-
-    #     if float(self.x_min_entry.get()) or float(self.x_min_entry.get()) != ValueError:
-    #       x_min = float(self.x_min_entry.get())
-    #       x_max = float(self.x_max_entry.get())
-    #     else:
-    #       x_min = float(-10)
-    #       x_max = float(10)
-
-
-    #     x_range = (x_min, x_max)
-
-    #     y_min = float(self.y_min_entry.get())
-    #     y_max = float(self.y_max_entry.get())
-
-    #     clr = str(self.color_entry.get())
-
-    #     num_points = 1000
-
     
-    #     # Check if the function has already been plotted
-    #     if function_str in self.plot_handles:
-    #         # Update the color of the existing plot
-    #         handle = self.plot_handles[function_str]
-    #         handle.set_color(clr)
-    #         messagebox.showwarning(title="Warning", message="The function already exists")
-    #     if self.is_constant_function(function_str) is not None and function_str not in self.plot_handles:
-    #         x_vals = np.linspace(x_min, x_max, 2)
-    #         y_vals = np.full(2, self.is_constant_function(function_str))
-    #         handle, = self.ax.plot(x_vals, y_vals, label=function_str, color=clr)
-    #         self.plot_handles[function_str] = handle
-    #         self.functions_list.append(function_str) 
-    #     else:
-            
-    #         x_vals = np.linspace(x_range[0], x_range[1], num_points)
-
-    #         # Create a namespace for the math functions
-    #         namespace = {'x': x_vals}
-    #         namespace.update(math.__dict__)
-    #         namespace.update({'exp': np.exp, 'sin': np.sin, 
-    #                         'cos': np.cos, 'tan': np.tan,
-    #                         'log': np.log10, 'ln': np.log, 
-    #                         'sqrt': np.sqrt}) # type: ignore
-
-    #         # Evaluate the function for each x value
-    #         try:
-    #             y_vals = eval(function_str, namespace)
-    #         except:
-    #             messagebox.showerror(title="Error", message="Invalid function.")
-    #             print("Invalid function.")
-    #             return
-
-    #     if function_str not in self.plot_handles:
-    #         # Create the plot
-    #         handle, = self.ax.plot(x_vals, y_vals, label=function_str, color=clr)
-    #         self.plot_handles[function_str] = handle
-    #         self.functions_list.append(function_str) 
-    #         print(self.plot_handles)
-    #     else:
-    #         pass
-        
-
-   
-    #     self.ax.set_xlim(xmin=x_min, xmax=x_max)  
-    #     self.ax.set_ylim(ymin=y_min, ymax=y_max)
-    #     self.ax.spines["left"].set_position("zero") #type:ignore
-    #     self.ax.spines["bottom"].set_position("zero") #type:ignore
-    #     self.ax.spines["right"].set_visible(False) #type:ignore
-    #     self.ax.spines["top"].set_visible(False) #type:ignore
-
-    #     self.ax.legend()    
-    #     # Show the plot
-    #     plt.show()
 
     def plot_function(self):
         # Get function string and x range from entry boxes
-        function_str = self.function_entry.get()
-
         if self.x_min_entry.get() and self.x_max_entry.get():
             try:
                 x_min = float(self.x_min_entry.get())
                 x_max = float(self.x_max_entry.get())
             except ValueError:
-                messagebox.showerror(title="Error", message="Invalid x range.")
+                messagebox.showerror(title="Error", message="Invalid X Values.")
                 return
         else:
-            messagebox.showerror(title="Error", message="Please enter x range.")
+            messagebox.showerror(title="Error", message="Please Enter X Values.")
             return
 
-        y_min = float(self.y_min_entry.get())
-        y_max = float(self.y_max_entry.get())
+         # Get function string and y range from entry boxes
+        if self.y_min_entry.get() and self.y_max_entry.get():
+            try:
+                y_min = float(self.y_min_entry.get())
+                y_max = float(self.y_max_entry.get())
+            except ValueError:
+                messagebox.showerror(title="Error", message="Invalid Y Values.")
+                return
+        else:
+            messagebox.showerror(title="Error", message="Please Enter Y Values.")
+            return
 
+        function_str = self.function_entry.get()
         clr = str(self.color_entry.get())
+        num_points = 10000
 
-        num_points = 1000
 
         # Check if the function has already been plotted
         if function_str in self.plot_handles:
             # Update the color of the existing plot
             handle = self.plot_handles[function_str]
             handle.set_color(clr)
-            messagebox.showwarning(title="Warning", message="The function already exists, ")
+            messagebox.showwarning(title="Warning", message="The function already exists")
         elif self.is_constant_function(function_str) is not None:
-            x_vals = np.linspace(x_min, x_max, 2)
+            x_vals = np.linspace(x_min, x_max, num_points)
             y_vals = np.full(2, self.is_constant_function(function_str))
             handle, = self.ax.plot(x_vals, y_vals, label=function_str, color=clr)
             self.plot_handles[function_str] = handle
             self.functions_list.append(function_str) 
+
         else:
             x_vals = np.linspace(x_min, x_max, num_points)
-
             # Create a namespace for the math functions
             namespace = {'x': x_vals}
             namespace.update(math.__dict__)
             namespace.update({'exp': np.exp, 'sin': np.sin, 
                             'cos': np.cos, 'tan': np.tan,
                             'log': np.log10, 'ln': np.log, 
-                            'sqrt': np.sqrt}) # type: ignore
+                            'sqrt': np.sqrt,
+                            "arcsin": np.arcsin,
+                            "arccos": np.arccos,
+                            "arctan": np.arctan, }) # type: ignore
 
             # Evaluate the function for each x value
             try:
@@ -207,25 +148,23 @@ class GraphingCalculator:
                 messagebox.showerror(title="Error", message="Invalid function.")
                 print("Invalid function.")
                 return
+        
+            handle, = self.ax.plot(x_vals, y_vals, label=function_str, color=clr)
+            self.plot_handles[function_str] = handle
+            self.functions_list.append(function_str)
+        
 
-            if function_str not in self.plot_handles:
-                # Create the plot
-                handle, = self.ax.plot(x_vals, y_vals, label=function_str, color=clr)
-                self.plot_handles[function_str] = handle
-                self.functions_list.append(function_str) 
-            else:
-                pass
-
+       
         self.ax.set_xlim(x_min, x_max)  
         self.ax.set_ylim(y_min, y_max)
         self.ax.spines["left"].set_position("zero") #type:ignore
         self.ax.spines["bottom"].set_position("zero") #type: ignore 
         self.ax.spines["right"].set_visible(False) #type:ignore
-        self.ax.spines["top"].set_visible(False) #type:ignore 
+        self.ax.spines["top"].set_visible(False)
         self.master.after(100, self.master.update)  # force update the window to show the plot
         self.ax.legend()
+        plt.ion()
         plt.show()
-
 
       
 
