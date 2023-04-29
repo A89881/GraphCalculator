@@ -777,9 +777,109 @@ Possible adjust
 # # Show the plot
 # plt.show()
 
-my_dict = {'a': 1, 'b': 2, 'c': 3}
+# my_dict = {'a': 1, 'b': 2, 'c': 3}
 
-# Iterate through every key in the dictionary
-for key in my_dict.keys():
-    print(key)
+# # Iterate through every key in the dictionary
+# for key in my_dict.keys():
+#     print(key)
 
+ # def evaluate_expression(self, expr):
+    #     try:
+    #         return eval(expr)
+    #     except:
+    #         return None
+    
+  
+          
+    # def is_constant_function(self, function_str):
+    #     try:
+    #         namespace = {
+    #             'pi': math.pi,
+    #             'e': math.e,
+    #             'exp': np.exp,
+    #             'sin': np.sin,
+    #             'cos': np.cos,
+    #             'tan': np.tan,
+    #             'log': np.log10,
+    #             'ln': np.log,
+    #             'sqrt': np.sqrt,
+    #             "arcsin": np.arcsin,
+    #             "arccos": np.arccos,
+    #             "arctan": np.arctan, 
+    #         }
+    #         namespace.update(math.__dict__)
+    #         c = self.evaluate_expression(expr=function_str.format(**namespace))
+    #         if isinstance(c, (int, float)):
+    #             return c
+    #        else:
+    #             return None
+    #     except:
+    #         return None
+
+import math
+import numpy as np
+
+# def evaluate_expression(expression):
+#     constants = {"e": math.e, "pi": math.pi}
+#     try:
+#         return float(expression)
+#     except ValueError:
+#         for constant in constants:
+#             if expression == constant:
+#                 return constants[constant]
+#         try:
+#             return float(eval(expression))
+#         except (NameError, TypeError, SyntaxError):
+#             return None
+
+def evaluate_expression(expression):
+    constants = {'e': math.e, 'pi': math.pi,
+                'exp': np.exp,
+                'sin': np.sin,
+                'cos': np.cos,
+                'tan': np.tan,
+                'log': np.log10,
+                'ln': np.log,
+                'sqrt': np.sqrt,
+                "arcsin": np.arcsin,
+                "arccos": np.arccos,
+                "arctan": np.arctan, }
+    return eval(expression, constants)
+
+print(evaluate_expression('2 + 3'))              
+print(evaluate_expression('sin(pi/2)'))          
+print(evaluate_expression('ln(e**3)'))           
+print(type(evaluate_expression('sqrt(16) + pi/2')))
+
+   # def evaluate_expression(self, expr):
+    #     try:
+    #         return eval(expr)
+    #     except:
+    #         return None
+    
+
+          
+    # def is_constant_function(self, function_str):
+    #     try:
+    #         namespace = {
+    #             'pi': math.pi,
+    #             'e': math.e,
+    #             'exp': np.exp,
+    #             'sin': np.sin,
+    #             'cos': np.cos,
+    #             'tan': np.tan,
+    #             'log': np.log10,
+    #             'ln': np.log,
+    #             'sqrt': np.sqrt,
+    #             "arcsin": np.arcsin,
+    #             "arccos": np.arccos,
+    #             "arctan": np.arctan, 
+    #         }
+    #         namespace.update(math.__dict__)
+    #         c = self.evaluate_expression(expr=function_str.format(**namespace))
+    #         if isinstance(c, (int, float)):
+    #             return c
+    #         else:
+    #             return None
+    #     except:
+    #         return None
