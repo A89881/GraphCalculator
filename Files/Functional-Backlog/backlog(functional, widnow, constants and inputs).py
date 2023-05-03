@@ -54,12 +54,6 @@ class GraphingCalculator:
         self.fig, self.ax = plt.subplots()
         self.ax.grid()
 
-   
-    def sort_function_list(self, input):
-        list1 = []
-        [list1.append(x) for x in input if x not in list1]
-        return list1
-
     def random_color(self):
       r = randrange(255)
       g = randrange(255)
