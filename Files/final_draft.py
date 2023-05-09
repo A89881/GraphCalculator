@@ -56,7 +56,7 @@ class GraphingCalculator:
         self.y_max_entry.pack()
       
         # Create plot button
-        self.plot_button = tk.Button(master, text="plot function", command=self.plot_function)
+        self.plot_button = tk.Button(master, text="plot function/update window", command=self.plot_function)
         self.plot_button.pack()
 
         self.drop_menu_label = tk.Label(master, text="Menu: Extra Functions")
@@ -263,7 +263,7 @@ class GraphingCalculator:
 
     def display_info(self):
         messagebox.showinfo(title="Hello! How to Enter Functions", 
-        message="Welcome to the app: This is a Graphcalculator, you enter the function y = 2x^2 as in said format i.e, 2*x**2. You enter trig/log funtions as such sin(x) or log(x) or ln(x). There additional options below, where you can track, derive and etc, in which you can access through clicking")
+        message="Welcome to the app: This is a Graphcalculator, you enter the function y = 2x^2 as in said format i.e, 2*x**2. You enter trig/log funtions as such sin(x) or log(x) or ln(x). There additional options below, where you can track, derive and etc, in which you can apply through clicking on the function. Then if you wish to change the window of the graph, then enter the new window values and finally click on the plot-button ")
 
     def random_color(self):
       r = randrange(255)
